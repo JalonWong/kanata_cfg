@@ -1,0 +1,73 @@
+#|
+This text between the two pipe+octothorpe sequences is a multi-line comment.
+|#
+
+;; Text after double-semicolons are single-line comments.
+
+#|
+One defcfg entry may be added, which is used for configuration key-pairs. These
+configurations change kanata's behaviour at a more global level than the other
+configuration entries.
+|#
+
+(defcfg
+  process-unmapped-keys yes
+  concurrent-tap-hold yes
+  log-layer-changes no
+)
+
+(defsrc
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  caps a    s    d    f    g    h    j    k    l    ;    '    ret
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+  lctl lmet lalt           spc            ralt rmet rctl
+)
+
+(defalias
+  grl (tap-hold 200 200 _ (layer-toggle layers))
+  L1 (layer-switch default)
+  L2 (layer-switch dvorak)
+
+  cap (tap-hold-press 200 200 _ lctl)
+  dcp (multi (layer-toggle default) @cap)
+
+  arr (tap-hold-release-keys 200 200 (layer-toggle arrows) _ (d f u i o p j k l ;))
+  lalt (fork @arr _ (ctl sft met))
+)
+
+(defchordsv2
+  (7 8) . 150 first-release ()
+)
+
+(deflayer default
+  @grl 1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    _    ]    \
+  @cap a    s    d    f    g    h    j    k    l    ;    '    ret
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+  lctl lmet @lalt          spc            ralt menu rctl
+)
+
+(deflayer dvorak
+  @grl 1    2    3    4    5    6    7    8    9    0    [    ]    bspc
+  tab  '    ,    .    p    y    f    g    c    r    l    /    =    \
+  @dcp a    o    e    u    i    d    h    t    n    s    -    ret
+  lsft ;    q    j    k    x    b    m    w    v    z    rsft
+  lctl lmet @lalt          spc            ralt rmet rctl
+)
+
+(deflayer arrows
+  _    _    _    _    _    _    _    _    _    _    _    _    _    _
+  _    _    _    _    _    _    _   home  up  end  pgup  _    _    _
+  _    _    _   bspc  del  _    _   left down rght pgdn  _    _
+  _    _    _    _    _    _    _    _    _    _    _    _
+  _    _    _              _              _    _    _
+)
+
+(deflayer layers
+  _    @L1  @L2  _    lrld _    _    _    _    _    _    _    _    _
+  _    _    _    _    _    _    _    _    _    _    _    _    _    _
+  _    _    _    _    _    _    _    _    _    _    _    _    _
+  _    _    _    _    _    _    _    _    _    _    _    _
+  _    _    _              _              _    _    _
+)
