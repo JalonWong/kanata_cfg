@@ -25,7 +25,7 @@ configuration entries.
 )
 
 (defalias
-  grl (tap-hold 200 200 _ (layer-toggle layers))
+  grl (tap-hold-press 200 300 _ (layer-toggle layers))
   L1 (layer-switch default)
   L2 (layer-switch dvorak)
 
