@@ -1,10 +1,4 @@
 #|
-This text between the two pipe+octothorpe sequences is a multi-line comment.
-|#
-
-;; Text after double-semicolons are single-line comments.
-
-#|
 One defcfg entry may be added, which is used for configuration key-pairs. These
 configurations change kanata's behaviour at a more global level than the other
 configuration entries.
@@ -31,7 +25,7 @@ configuration entries.
 
   cap (multi (layer-toggle default) lctl)
 
-  arr (tap-hold-release-keys 200 200 (layer-toggle arrows) _ (d f u i o p j k l ;))
+  arr (tap-hold-release-keys 200 300 (layer-toggle arrows) _ (d f u i o p j k l ;))
   lalt (fork @arr _ (ctl sft met))
 )
 
