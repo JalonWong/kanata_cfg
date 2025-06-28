@@ -25,7 +25,7 @@ configuration entries.
 
   cap (multi (layer-toggle default) lctl)
 
-  arr (tap-hold-release-keys 200 300 (layer-toggle arrows) _ (d f u i o p j k l ;))
+  arr (tap-hold-release-keys 200 300 (layer-toggle arrows) _ (caps sft d f u i o p j k l ;))
   lalt (fork @arr _ (ctl sft met))
 )
 
@@ -52,7 +52,7 @@ configuration entries.
 (deflayer arrows
   _    _    _    _    _    _    _    _    _    _    _    _    _    _
   _    _    _    _    _    _    _   home  up  end  pgup  _    _    _
-  _    _    _   bspc  del  _    _   left down rght pgdn  _    _
+  lctl _    _   bspc  del  _    _   left down rght pgdn  _    _
   _    _    _    _    _    _    _    _    _    _    _    _
   _    _    _              _              _    _    _
 )
