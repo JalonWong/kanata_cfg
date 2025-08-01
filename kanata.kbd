@@ -19,14 +19,14 @@ configuration entries.
 )
 
 (defalias
-  grl (tap-hold-press 200 300 _ (layer-toggle layers))
+  grl (tap-hold-press 200 300 _ (layer-while-held layers))
+  lsf (one-shot-press 500 lsft)
+  rsf (tap-hold-press 200 300 (layer-switch arrows) _)
   L1 (layer-switch default)
   L2 (layer-switch dvorak)
+  LA (layer-switch arrows)
 
-  cap (multi (layer-toggle default) lctl)
-
-  arr (tap-hold-release-keys 200 300 (layer-toggle arrows) _ (caps sft d f u i o p j k l ;))
-  lalt (fork @arr _ (ctl sft met))
+  dctl (multi (layer-while-held default) lctl)
 )
 
 (defchordsv2
@@ -37,23 +37,23 @@ configuration entries.
   @grl 1    2    3    4    5    6    7    8    9    0    -    =    bspc
   tab  q    w    e    r    t    y    u    i    o    p    _    ]    \
   lctl a    s    d    f    g    h    j    k    l    ;    '    ret
-  lsft z    x    c    v    b    n    m    ,    .    /    rsft
-  caps lmet @lalt          spc            ralt menu rctl
+  @lsf z    x    c    v    b    n    m    ,    .    /    @rsf
+  caps lmet lalt          spc            ralt menu rctl
 )
 
 (deflayer dvorak
   @grl 1    2    3    4    5    6    7    8    9    0    [    ]    bspc
   tab  '    ,    .    p    y    f    g    c    r    l    /    =    \
-  @cap a    o    e    u    i    d    h    t    n    s    -    ret
-  lsft ;    q    j    k    x    b    m    w    v    z    rsft
-  caps lmet @lalt          spc            ralt rmet rctl
+ @dctl a    o    e    u    i    d    h    t    n    s    -    ret
+  @lsf ;    q    j    k    x    b    m    w    v    z    rsft
+  caps lmet lalt          spc            ralt rmet rctl
 )
 
 (deflayer arrows
   _    _    _    _    _    _    _    _    _    _    _    _    _    _
   _    _    _    _    _    _    _   home  up  end  pgup  _    _    _
   lctl _    _   bspc  del  _    _   left down rght pgdn  _    _
-  _    _    _    _    _    _    _    _    _    _    _    _
+  _    _    _    _    _    _    _    _    _    _    @L1  @L1
   _    _    _              _              _    _    _
 )
 
