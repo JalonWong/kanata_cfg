@@ -20,7 +20,7 @@ configuration entries.
 
 (defalias
   grl (tap-hold-press 200 300 _ (layer-while-held layers))
-  lsf (one-shot-press 500 lsft)
+  lsf (one-shot-press 200 lsft)
   rsf (tap-hold-press 200 300 (layer-switch arrows) _)
   L1 (layer-switch default)
   L2 (layer-switch dvorak)
