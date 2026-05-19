@@ -11,22 +11,23 @@ configuration entries.
 )
 
 (defsrc
+  esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
   grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
   tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
   caps a    s    d    f    g    h    j    k    l    ;    '    ret
   lsft z    x    c    v    b    n    m    ,    .    /    rsft
-  lctl lmet lalt           spc            ralt rmet rctl
+  lctl lmet lalt           spc            ralt rmet menu rctl
 )
 
 (defalias
   grl (tap-hold-press 200 300 _ (layer-while-held layers))
-  lsf (one-shot-press 200 lsft)
-  rsf (tap-hold-press 200 300 (layer-switch arrows) _)
+  ;; lsf (one-shot-press 200 lsft)
+  rsf (tap-hold-press 200 300 (layer-switch functions) _)
+  LF (layer-while-held functions)
   L1 (layer-switch default)
   L2 (layer-switch dvorak)
-  LA (layer-switch arrows)
 
-  dctl (multi (layer-while-held default) lctl)
+  dcl (multi (layer-while-held default) lctl)
 )
 
 (defchordsv2
@@ -34,33 +35,37 @@ configuration entries.
 )
 
 (deflayer default
+  _    _    _    _    _    _    _    _    _    _    _    _    _
   @grl 1    2    3    4    5    6    7    8    9    0    -    =    bspc
   tab  q    w    e    r    t    y    u    i    o    p    _    ]    \
   lctl a    s    d    f    g    h    j    k    l    ;    '    ret
-  @lsf z    x    c    v    b    n    m    ,    .    /    @rsf
-  caps lmet lalt          spc            ralt menu rctl
+  _    z    x    c    v    b    n    m    ,    .    /    @rsf
+  caps lmet lalt           spc            ralt rmet @LF  rctl
 )
 
 (deflayer dvorak
+  _    _    _    _    _    _    _    _    _    _    _    _    _
   @grl 1    2    3    4    5    6    7    8    9    0    [    ]    bspc
   tab  '    ,    .    p    y    f    g    c    r    l    /    =    \
- @dctl a    o    e    u    i    d    h    t    n    s    -    ret
-  @lsf ;    q    j    k    x    b    m    w    v    z    rsft
-  caps lmet lalt          spc            ralt rmet rctl
+  @dcl a    o    e    u    i    d    h    t    n    s    -    ret
+  _    ;    q    j    k    x    b    m    w    v    z    rsft
+  caps lmet lalt           spc            ralt rmet @LF  rctl
 )
 
-(deflayer arrows
+(deflayer functions
+  _    mute vold volu _    pp   prev next _    _    _    _    _
   _    _    _    _    _    _    _    _    _    _    _    _    _    _
-  _    _    _    _    _    _    _   home  up  end  pgup  _    _    _
-  lctl _    _   bspc  del  _    _   left down rght pgdn  _    _
+  _    _    _    _    _    _    _    home up   end  pgup _    _    _
+  lctl _    _    bspc del  _    _    left down rght pgdn _    _
   _    _    _    _    _    _    _    _    _    _    @L1  @L1
-  _    _    _              _              _    _    _
+  _    _    _              _              _    _    _    _
 )
 
 (deflayer layers
+  _    _    _    _    _    _    _    _    _    _    _    _    _
   _    @L1  @L2  _    lrld _    _    _    _    _    _    _    _    _
   _    _    _    _    _    _    _    _    _    _    _    _    _    _
   _    _    _    _    _    _    _    _    _    _    _    _    _
   _    _    _    _    _    _    _    _    _    _    _    _
-  _    _    _              _              _    _    _
+  _    _    _              _              _    _    _    _
 )
